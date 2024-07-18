@@ -108,6 +108,30 @@
         font-size: 14px;
         margin-top: 30px;
       }
+
+      .button {
+        background-color: #e81cff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+      }
+      .button:hover {
+        background-color: #40c9ff;
+      }
+      .calendar-link {
+        color: #40c9ff;
+        text-decoration: none;
+        margin-top: 10px;
+        display: inline-block;
+      }
+      .calendar-link:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
@@ -136,6 +160,11 @@
       <p class="details">Sábado, 27 de Julio de 2024<br />21:30 hs</p>
       <p class="location">Blondie</p>
       <p class="footer">¡No faltes a esta noche inolvidable!</p>
+      <p class="footer">¡No faltes a esta noche inolvidable!</p>
+      <button id="confirmButton" class="button">Confirmar Asistencia</button>
+      <a href="#" id="calendarLink" class="calendar-link"
+        >Añadir al Calendario</a
+      >
     </div>
 
     <script>
@@ -195,6 +224,28 @@
           starsContainer.appendChild(star);
         }
       }
+
+      document
+        .getElementById('confirmButton')
+        .addEventListener('click', function () {
+          alert('¡Gracias por confirmar tu asistencia!');
+          // Aquí puedes añadir código para enviar la confirmación a un servidor si lo deseas
+        });
+
+      // Función para generar el enlace del calendario
+      function generateCalendarLink() {
+        const eventDate = new Date('2024-07-27T21:30:00-03:00');
+        const endDate = new Date(eventDate.getTime() + 3 * 60 * 60 * 1000); // Asumimos que el evento dura 3 horas
+        const title = 'Despedida de Juli';
+        const location = 'Blondie';
+        const details = '¡No faltes a esta noche inolvidable!';
+
+        const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${eventDate.toISOString().replace(/-|:|\.\d+/g, '')}/${endDate.toISOString().replace(/-|:|\.\d+/g, '')}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
+
+        document.getElementById('calendarLink').href = googleCalendarUrl;
+      }
+
+      generateCalendarLink();
 
       createStars();
     </script>
