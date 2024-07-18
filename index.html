@@ -1,31 +1,202 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RECORDATORIO PARA JULIA</title>
-</head>
-<body>
-    <header>
-        <div class="titulos">
-            <h1>HOLA JULIA</h1>
-            <h2>Este es tu recordatorio!!!</h2>
-        </div>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Despedida de Juli</title>
 
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='3' height='2' fill='%23c60b1e'/%3E%3Crect width='3' height='1' fill='%23ffc400' y='0.5'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
 
-    <main>
-        <div>
-            <p>Nos vemos mañana 17hs</p>
-        </div>
-        <div id="countdown"></div>
-        <div>
-            <p>No te olvides!</p>
-        </div>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #0c0c0c;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        border-radius: 50%;
+        animation: twinkleAndFall 5s linear infinite;
+      }
+      @keyframes twinkleAndFall {
+        0% {
+          opacity: 0;
+          transform: translateY(0) translateX(0);
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(100px) translateX(20px);
+        }
+      }
 
-    </main>
-    <script src="index.js"></script>
-</body>
+      .invitation-card {
+        background:
+          linear-gradient(rgba(33, 33, 33, 0.9), rgba(33, 33, 33, 0.9))
+            padding-box,
+          linear-gradient(145deg, transparent 35%, #e81cff, #40c9ff) border-box;
+        border: 2px solid transparent;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+      h1 {
+        color: #e81cff;
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      .details {
+        color: #fff;
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+      .countdown {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+      }
+      .countdown-item {
+        display: flex;
+        flex-direction: column;
+      }
+      .countdown-item span {
+        font-size: 36px;
+        font-weight: bold;
+        color: #40c9ff;
+      }
+      .countdown-item label {
+        font-size: 14px;
+        color: #717171;
+      }
+      .location {
+        color: #e81cff;
+        font-size: 24px;
+        margin-top: 20px;
+      }
+      .footer {
+        color: #717171;
+        font-size: 14px;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars"></div>
+    <div class="invitation-card">
+      <h1>¡Despedida de Juli! 🥂</h1>
+      <p class="details">Te invito a celebrar conmigo</p>
+      <div class="countdown">
+        <div class="countdown-item">
+          <span id="days">00</span>
+          <label>Días</label>
+        </div>
+        <div class="countdown-item">
+          <span id="hours">00</span>
+          <label>Horas</label>
+        </div>
+        <div class="countdown-item">
+          <span id="minutes">00</span>
+          <label>Minutos</label>
+        </div>
+        <div class="countdown-item">
+          <span id="seconds">00</span>
+          <label>Segundos</label>
+        </div>
+      </div>
+      <p class="details">Sábado, 27 de Julio de 2024<br />21:30 hs</p>
+      <p class="location">Blondie</p>
+      <p class="footer">¡No faltes a esta noche inolvidable!</p>
+    </div>
+
+    <script>
+      // Código de la cuenta regresiva (el mismo que antes)
+      // Función para actualizar la cuenta regresiva
+      function updateCountdown() {
+        const targetDate = new Date('2024-07-27T21:30:00-03:00').getTime();
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference < 0) {
+          document.querySelector('.countdown').innerHTML =
+            '<p>¡La cuenta regresiva ha terminado!</p>';
+          return;
+        }
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor(
+          (difference % (1000 * 60 * 60)) / (1000 * 60),
+        );
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = days
+          .toString()
+          .padStart(2, '0');
+        document.getElementById('hours').innerText = hours
+          .toString()
+          .padStart(2, '0');
+        document.getElementById('minutes').innerText = minutes
+          .toString()
+          .padStart(2, '0');
+        document.getElementById('seconds').innerText = seconds
+          .toString()
+          .padStart(2, '0');
+      }
+
+      // Actualizar la cuenta regresiva cada segundo
+      setInterval(updateCountdown, 1000);
+
+      // Inicializar la cuenta regresiva
+      updateCountdown();
+
+      // Código para crear las estrellas
+      function createStars() {
+        const starsContainer = document.querySelector('.stars');
+        const numberOfStars = 100;
+
+        for (let i = 0; i < numberOfStars; i++) {
+          const star = document.createElement('div');
+          star.classList.add('star');
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.top = `${Math.random() * 100}%`;
+          star.style.animationDelay = `${Math.random() * 5}s`;
+          starsContainer.appendChild(star);
+        }
+      }
+
+      createStars();
+    </script>
+  </body>
 </html>
