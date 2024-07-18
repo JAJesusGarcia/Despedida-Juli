@@ -109,7 +109,7 @@
         margin-top: 30px;
       }
 
-      .button {
+      /* .button {
         background-color: #e81cff;
         color: white;
         border: none;
@@ -122,7 +122,7 @@
       }
       .button:hover {
         background-color: #40c9ff;
-      }
+      } */
       .calendar-link {
         color: #40c9ff;
         text-decoration: none;
@@ -161,7 +161,7 @@
       <p class="location">Blondie</p>
       <p class="footer">¡No faltes a esta noche inolvidable!</p>
       <p class="footer">¡No faltes a esta noche inolvidable!</p>
-      <button id="confirmButton" class="button">Confirmar Asistencia</button>
+      <!-- <button id="confirmButton" class="button">Confirmar Asistencia</button> -->
       <a href="#" id="calendarLink" class="calendar-link"
         >Añadir al Calendario</a
       >
@@ -225,12 +225,11 @@
         }
       }
 
-      document
-        .getElementById('confirmButton')
-        .addEventListener('click', function () {
-          alert('¡Gracias por confirmar tu asistencia!');
-          // Aquí puedes añadir código para enviar la confirmación a un servidor si lo deseas
-        });
+      //   document
+      //     .getElementById('confirmButton')
+      //     .addEventListener('click', function () {
+      //       alert('¡Gracias por confirmar tu asistencia!');
+      //     });
 
       // Función para generar el enlace del calendario
       function generateCalendarLink() {
